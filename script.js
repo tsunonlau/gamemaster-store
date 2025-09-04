@@ -850,6 +850,8 @@ function logTransaction(details, paymentMethod) {
 }
 
 // ===== SUCCESS MODAL =====
+// UPDATED: showSuccessModal function in script.js - Replace this function
+
 function showSuccessModal(details) {
     const modal = document.getElementById('successModal');
     const orderDetails = document.getElementById('orderDetails');
@@ -857,22 +859,40 @@ function showSuccessModal(details) {
     const totalAmount = details.purchase_units?.[0]?.amount?.value || '0.00';
     
     orderDetails.innerHTML = `
+        <h4>Order Confirmation</h4>
         <div class="order-detail-item">
-            <strong>Order ID:</strong> ${details.id}
+            <strong>Order ID:</strong> <span>${details.id}</span>
         </div>
         <div class="order-detail-item">
-            <strong>Amount:</strong> $${totalAmount}
+            <strong>Amount:</strong> <span>$${totalAmount}</span>
         </div>
         <div class="order-detail-item">
-            <strong>Status:</strong> ${details.status}
+            <strong>Status:</strong> <span>${details.status}</span>
         </div>
         <div class="order-detail-item">
-            <strong>Payment Method:</strong> ${details.payment_source ? 'Card' : 'PayPal'}
+            <strong>Payment Method:</strong> <span>${details.payment_source ? 'Credit/Debit Card' : 'PayPal'}</span>
+        </div>
+        <div class="order-detail-item">
+            <strong>Transaction Date:</strong> <span>${new Date().toLocaleDateString()}</span>
         </div>
     `;
     
+    // Replace the existing buttons with properly structured container
+    const existingButtons = modal.querySelector('.success-content').innerHTML;
+    modal.querySelector('.success-content').innerHTML = existingButtons.replace(
+        /<button.*?Continue Shopping<\/button>[\s\S]*?<button.*?Download Receipt<\/button>/,
+        `<div class="success-buttons">
+            <button onclick="closeSuccessModal()" class="success-button">
+                <i class="fas fa-shopping-cart"></i> Continue Shopping
+            </button>
+            <button onclick="downloadTransactions()" class="download-button">
+                <i class="fas fa-download"></i> Download Receipt
+            </button>
+        </div>`
+    );
+    
     modal.classList.add('show');
-    console.log('[GameMaster] 🎉 Success modal displayed');
+    console.log('[GameMaster] 🎉 Enhanced success modal displayed');
 }
 
 function closeSuccessModal() {
