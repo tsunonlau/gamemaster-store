@@ -1,0 +1,45 @@
+{
+  "name": "gamemaster-store",
+  "version": "1.0.0",
+  "description": "Modern board game e-commerce website with PayPal integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'No build step required for Node.js server'",
+    "test": "echo 'Error: no test specified' && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "keywords": [
+    "ecommerce",
+    "board-games",
+    "paypal",
+    "express",
+    "node",
+    "javascript",
+    "shopping-cart",
+    "payments"
+  ],
+  "author": "GameMaster Store",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/gamemaster-store.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/gamemaster-store/issues"
+  },
+  "homepage": "https://github.com/your-username/gamemaster-store#readme"
+}

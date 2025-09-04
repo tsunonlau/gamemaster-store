@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameMaster - Premium Board Games Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-chess-king"></i>
+                <span>GameMaster</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#products" class="nav-link">Products</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Discover Amazing Board Games</h1>
+            <p>Premium collection of strategic, family, and party games for every occasion</p>
+            <button class="cta-button" onclick="document.getElementById('products').scrollIntoView()">
+                Explore Games
+            </button>
+        </div>
+        <div class="hero-image">
+            <i class="fas fa-dice-d20"></i>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2>Featured Board Games</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be displayed here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: $<span id="cartTotal">0.00</span></strong>
+            </div>
+            <button class="checkout-button" onclick="proceedToCheckout()" id="checkoutButton">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <span class="close-modal" onclick="closeCheckout()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="checkout-summary">
+                    <h3>Order Summary</h3>
+                    <div id="checkoutItems"></div>
+                    <div class="checkout-total">
+                        <strong>Total: $<span id="checkoutTotal">0.00</span></strong>
+                    </div>
+                </div>
+                
+                <div class="payment-section">
+                    <h3>Payment Method</h3>
+                    
+                    <!-- PayPal Button Container -->
+                    <div id="paypal-button-container"></div>
+                    
+                    <!-- Custom Card Fields -->
+                    <div class="card-payment-section">
+                        <h4>Pay with Credit/Debit Card</h4>
+                        <div class="billing-address">
+                            <h5>Billing Address</h5>
+                            <div class="address-form">
+                                <input type="text" id="firstName" placeholder="First Name" required>
+                                <input type="text" id="lastName" placeholder="Last Name" required>
+                                <input type="text" id="address" placeholder="Street Address" required>
+                                <input type="text" id="city" placeholder="City" required>
+                                <select id="state" required>
+                                    <option value="">Select State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="CA">California</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="NY">New York</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="CO">Colorado</option>
+                                </select>
+                                <input type="text" id="zipCode" placeholder="ZIP Code" required>
+                                <select id="country" required>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="GB">United Kingdom</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="card-fields-container">
+                            <div class="card-field">
+                                <label for="card-name">Cardholder Name</label>
+                                <div id="card-name"></div>
+                            </div>
+                            <div class="card-field">
+                                <label for="card-number">Card Number</label>
+                                <div id="card-number"></div>
+                            </div>
+                            <div class="card-row">
+                                <div class="card-field">
+                                    <label for="expiration-date">Expiration Date</label>
+                                    <div id="expiration-date"></div>
+                                </div>
+                                <div class="card-field">
+                                    <label for="cvv">CVV</label>
+                                    <div id="cvv"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="card-submit-button" class="pay-button" disabled>
+                            Pay with Card
+                        </button>
+                    </div>
+                    
+                    <div class="paypal-notice">
+                        <p><small>By paying with your card, you acknowledge that your data will be processed by PayPal subject to the <a href="https://www.paypal.com/us/webapps/mpp/ua/privacy-full" target="_blank">PayPal Privacy Statement</a>.</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content product-modal-content">
+            <span class="close-modal" onclick="closeProductModal()">&times;</span>
+            <div id="productModalContent">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Processing your payment...</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content success-modal">
+            <div class="success-content">
+                <i class="fas fa-check-circle"></i>
+                <h2>Payment Successful!</h2>
+                <p>Thank you for your purchase. Your order has been confirmed.</p>
+                <div class="order-details" id="orderDetails">
+                    <!-- Order details will be displayed here -->
+                </div>
+                <button onclick="closeSuccessModal()" class="success-button">Continue Shopping</button>
+                <button onclick="downloadTransactions()" class="download-button">
+                    <i class="fas fa-download"></i> Download Receipt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Styles -->
+    <style>
+        .cart-notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cart-notification.show {
+            transform: translateX(0);
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        .empty-cart i {
+            font-size: 3rem;
+            margin-top: 1rem;
+            opacity: 0.5;
+        }
+        
+        .download-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            justify-content: center;
+        }
+        
+        .download-button:hover {
+            background: #2980b9;
+        }
+        
+        .product-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .product-specs small {
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .product-stock {
+            font-size: 0.8rem;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .specs-detailed {
+            margin: 1rem 0;
+        }
+    </style>
+
+    <!-- PayPal JavaScript SDK - Replace YOUR_SANDBOX_CLIENT_ID with your actual client ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AUS-78-lLNn1spgQkDuEoiyrQE2VYILSRLaX0ziWiH-AAE3cLg89Rt_AZmsb8zlaU0tpMjzS4jNSopMm&components=buttons,card-fields&currency=USD&intent=capture&enable-funding=venmo&disable-funding=paylater"></script>
+    
+    <!-- Main Application Script -->
+    <script src="script.js"></script>
+</body>
+</html>
