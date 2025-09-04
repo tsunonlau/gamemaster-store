@@ -136,7 +136,7 @@ git init
 git add .
 git commit -m "Initial commit: GameMaster board game store"
 git branch -M main
-git remote add origin https://github.com/your-username/gamemaster-store.git
+git remote add origin https://github.com/tsunonlau/gamemaster-store.git
 git push -u origin main
 ```
 

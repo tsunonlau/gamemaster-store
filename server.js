@@ -17,7 +17,7 @@ app.use(express.static(__dirname));
 
 // PayPal Configuration - Use environment variables in production
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID || 'AUS-78-lLNn1spgQkDuEoiyrQE2VYILSRLaX0ziWiH-AAE3cLg89Rt_AZmsb8zlaU0tpMjzS4jNSopMm';
-const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET || 'AUS-78-lLNn1spgQkDuEoiyrQE2VYILSRLaX0ziWiH-AAE3cLg89Rt_AZmsb8zlaU0tpMjzS4jNSopMm';
+const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET || 'EPYopbex6MPFZxFYMiYoZaZOdCWkz474ZeS07Vu6L7QzRbS1hqIg1nsanl69M5HzsEVF2cHvd5A6aeXi';
 const PAYPAL_API_URL = process.env.PAYPAL_API_URL || 'https://api-m.sandbox.paypal.com';
 const PORT = process.env.PORT || 3000;
 
