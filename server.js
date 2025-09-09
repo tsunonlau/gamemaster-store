@@ -133,10 +133,13 @@ app.post('/api/create-paypal-order', async (req, res) => {
                         user_action: 'PAY_NOW'
                     },
                     // FORCE 3D Secure authentication with explicit challenge
-                    verification_method: 'SCA_ALWAYS',
+                    //verification_method: 'SCA_ALWAYS',
                     // Add contingencies to force step-up authentication
                     attributes: {
-                        contingencies: ['3D_SECURE']
+                        verification: {
+                            method: 'SCA_ALWAYS'
+                        }
+                        //,contingencies: ['3D_SECURE']
                     }
                 }
             },
